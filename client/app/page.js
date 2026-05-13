@@ -7,7 +7,7 @@ import {
   FiPlus, FiUpload, FiSend, FiSearch, FiZap,
   FiImage, FiLayout, FiTerminal, FiChevronDown,
   FiSun, FiMoon, FiMoreHorizontal, FiArrowRight, FiTrash2,
-  FiCode, FiCopy
+  FiCode, FiCopy, FiX
 } from "react-icons/fi";
 import { CgTerminal } from "react-icons/cg";
 import { RiSparklingLine, RiRobot2Line } from "react-icons/ri";
@@ -122,15 +122,47 @@ export default function AssistantDashboard() {
     }
   };
 
+  const removeAttachment = (url) => {
+    setAttachments(prev => prev.filter(a => a.url !== url));
+  };
+
   const processFile = async (file) => {
     if (!file) return;
     setUploading(true);
     setUploadProgress(0);
     try {
-      // In a real local app, you'd upload this to a local server or cloud.
-      // We'll mimic the standard flow here.
-      toast.error("File upload is not fully implemented in this local version yet.");
+      // 1. Get signed URL via proxy
+      const { data: signData } = await axios.get("/api/v1/get_upload_url", {
+        params: { filename: file.name }
+      });
+
+      const { url, fields } = signData;
+      const formData = new FormData();
+      Object.entries(fields).forEach(([key, value]) => {
+        formData.append(key, value);
+      });
+      formData.append("file", file);
+      formData.append("x-proxy-target-url", url);
+
+      // 2. Upload to proxy URL
+      await axios.post("/api/v1/upload-binary", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+        onUploadProgress: (pe) => {
+          setUploadProgress(Math.round((pe.loaded * 100) / pe.total));
+        }
+      });
+
+      // 3. Final URL
+      const uploadedUrl = `https://cdn.muapi.ai/${fields.key}`;
+      const kind = file.type?.startsWith("video/") ? "video"
+                 : file.type?.startsWith("audio/") ? "audio"
+                 : "image";
+      
+      const att = { url: uploadedUrl, kind };
+      setAttachments(prev => [...prev, att]);
+      toast.success("File uploaded successfully");
     } catch (err) {
+      console.error("Upload failed", err);
       toast.error("Upload failed");
     } finally {
       setUploading(false);
@@ -259,7 +291,31 @@ export default function AssistantDashboard() {
                       <FiPlus size={20} />
                     )}
                   </button>
-                  
+
+                  {/* Attachment Preview Bar */}
+                  {attachments.length > 0 && (
+                    <div className="flex flex-wrap gap-2 px-2">
+                      {attachments.map((att, i) => (
+                        <div 
+                          key={i} 
+                          className="relative group flex items-center gap-2 px-2 py-1 bg-bg-page border border-divider rounded-lg cursor-help hover:border-primary/50 transition-all"
+                          onMouseEnter={() => setHoveredAsset(att)}
+                          onMouseLeave={() => setHoveredAsset(null)}
+                        >
+                          <div className="w-5 h-5 rounded overflow-hidden">
+                            {att.kind === "image" ? <img src={att.url} className="w-full h-full object-cover" /> : <FiTerminal size={10} />}
+                          </div>
+                          <span className="text-[10px] font-bold text-secondary-text">asset_{i+1}</span>
+                          <button 
+                            onClick={(e) => { e.stopPropagation(); removeAttachment(att.url); }}
+                            className="ml-1 text-secondary-text hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            <FiX size={12} />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
                 <div className="flex items-center gap-2">
                   <button 
@@ -271,6 +327,21 @@ export default function AssistantDashboard() {
                   </button>
                 </div>
               </div>
+              
+              {hoveredAsset && (
+                <div className="absolute bottom-full left-4 mb-4 w-72 aspect-square bg-bg-card border border-divider rounded-md shadow-[0_32px_64px_-12px_rgba(0,0,0,0.2)] overflow-hidden z-[110] animate-in fade-in zoom-in-95 duration-200 pointer-events-none">
+                  {hoveredAsset.kind === "image" ? (
+                    <img src={hoveredAsset.url} className="w-full h-full object-cover" />
+                  ) : hoveredAsset.kind === "video" ? (
+                    <video src={hoveredAsset.url} className="w-full h-full object-cover" autoPlay muted loop />
+                  ) : (
+                    <div className="w-full h-full flex flex-col items-center justify-center bg-bg-page gap-3 p-6 text-center">
+                      <FiTerminal size={48} className="text-primary opacity-20" />
+                      <div className="text-xs font-medium text-secondary-text truncate w-full">{hoveredAsset.url.split('/').pop()}</div>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
           <div className="w-full">
