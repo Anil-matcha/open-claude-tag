@@ -192,3 +192,65 @@ Built with [Muapi.ai](https://muapi.ai) — the unified API for AI image and vid
 *Looking for a free, open-source Lovart alternative? Open Lovart is an open-source AI design agent — a Lovart, Runway Agent, Luma Labs Agent, Krea Agent, Pika Agent, Galileo AI, Magic Patterns replacement that you can self-host, customize, and extend.*
 
 This project is an independent, experimental, and open-source initiative and is not affiliated with, endorsed by, or associated with Lovart, Runway, Luma Labs, Krea AI, Pika Labs, Galileo AI, Magic Patterns, or any of their respective companies, products, or services. Any references to third-party platforms, models, or technologies are made solely for interoperability, benchmarking, research, or educational purposes. All trademarks, logos, and brand names are the property of their respective owners. If any content in this repository creates confusion or raises concerns, please contact us and we will promptly review and address it.
+
+## FAQ
+
+### What is Open AI Design Agent?
+
+**Open AI Design Agent** is a free, open-source AI design agent — alternative to **Lovart AI**, **Runway Agent**, **Luma Labs Agent**, **Krea Agent**. It turns natural-language briefs into full creative deliverables by orchestrating **200+ image and video models**.
+
+### Key Features
+
+| Feature | Description |
+|---------|-------------|
+| **Design Agent** | Describe a brand/campaign → agent plans, picks models, generates, assembles the kit |
+| **200+ Models** | Flux 2 Pro, Nano Banana 2, Ideogram v3, Recraft v3, Midjourney v7, Kling, Sora, Veo, Runway, Luma Ray2 |
+| **Brand Kit** | Persist palette, fonts, logo, tone — every generation respects the kit |
+| **Multi-Image Reference** | Up to 14 images for style transfer, brand consistency, product placement |
+| **Motion Studio** | Animated logos, video ads, social video cutdowns (9:16/1:1/16:9) |
+| **Templates Library** | Instagram posts, YouTube thumbnails, A4 posters, business cards, packaging mockups |
+| **Vectorize & Export** | Convert raster to SVG, remove backgrounds, upscale to 4K print-ready |
+| **Workflow Studio** | Visual node-based editor to chain models into repeatable pipelines |
+
+### How to Get Started
+
+**Hosted (No Install):** https://muapi.ai/assistant — Run directly in browser
+
+**Self-Hosted:**
+```bash
+git clone https://github.com/Anil-matcha/Open-AI-Design-Agent.git
+cd Open-AI-Design-Agent && npm run setup && npm run dev
+```
+
+Visit `http://localhost:3000` and enter your Muapi API key.
+
+### Supported Asset Types
+
+| Asset | Recommended Models |
+|-------|---------------------|
+| **Posters/Flyers** | Ideogram v3, Flux Pro Ultra, Nano Banana 2 |
+| **Logos** | Recraft v3, Ideogram v3 (+ Vectorize for SVG) |
+| **Social Posts** | Seedream 5, Flux Dev, Nano Banana 2 |
+| **Product Mockups** | Nano Banana 2 Edit, Flux Kontext Pro |
+| **Motion Ads** | Kling v3, Sora 2, Veo 3, Runway, Luma Ray2 |
+| **YouTube Thumbnails** | Ideogram v3, Nano Banana 2 |
+
+### Why Open vs Lovart/Runway/Luma/Krea?
+
+- **Free & open-source** — MIT-licensed, no subscription, no credit caps
+- **Self-hosted** — your briefs and outputs stay on your machine
+- **Inspectable agent loop** — every plan and model choice is visible and editable
+- **Static + motion in one agent** — same brief produces poster, social, and video
+
+### Help Resources
+
+| Resource | Link |
+|----------|------|
+| **Hosted Studio** | https://muapi.ai/assistant |
+| **Reddit Community** | https://reddit.com/r/muapi |
+| **Discord** | https://discord.gg/s7KW4fsqXK |
+| **Related Projects** | [Open-Generative-AI](https://github.com/Anil-matcha/Open-Generative-AI), [Vibe Workflow](https://github.com/SamurAIGPT/Vibe-Workflow) |
+
+### License
+
+MIT License - Open source and free to use.
