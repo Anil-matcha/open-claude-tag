@@ -4,6 +4,126 @@
 
 **Community:** Join [Reddit](https://reddit.com/r/muapi) & [Discord](https://discord.gg/s7KW4fsqXK) for discussions and support
 
+---
+
+## ☁️ Powered by Atlas Cloud — Unified LLM + Image Generation API
+
+<p align="center">
+  <a href="https://www.atlascloud.ai/?utm_source=github&utm_medium=link&utm_campaign=Open-AI-Design-Agent">
+    <img src="assets/atlas-cloud-logo.png" alt="Atlas Cloud" width="200"/>
+  </a>
+</p>
+
+[**Atlas Cloud**](https://www.atlascloud.ai/?utm_source=github&utm_medium=link&utm_campaign=Open-AI-Design-Agent) gives Open-AI-Design-Agent a single API key for **both** LLM reasoning and image generation — so you can replace multiple vendor integrations with one endpoint:
+
+- **LLM (OpenAI-compatible)** — DeepSeek, Qwen, Claude, Llama, and 50+ models via a drop-in OpenAI-format API. Use for the agent's planning loop, routing decisions, and brand-copy generation.
+- **Image Generation (async API)** — gpt-image-2, Wan, Flux, Seedream, Recraft, and more via `api.atlascloud.ai`. Power your Design Studio and Motion Studio without managing separate API keys per model vendor.
+
+**Quick configuration:**
+
+```env
+# LLM backend (OpenAI-compatible, drop-in replacement)
+OPENAI_BASE_URL=https://api.atlascloud.ai/v1
+OPENAI_API_KEY=<your-atlascloud-key>
+OPENAI_MODEL=deepseek-ai/deepseek-v4-pro
+
+# Image Generation (Atlas async API)
+ATLAS_IMAGE_BASE=https://api.atlascloud.ai/api/v1/model
+ATLAS_IMAGE_MODEL=openai/gpt-image-2/text-to-image
+```
+
+> **Note for reasoning models:** Set `max_tokens` ≥ 512 (recommended: 4096+) to avoid truncated responses from inference-heavy models like DeepSeek-v4-Pro.
+
+Get your free API key → [Atlas Cloud Coding Plan](https://www.atlascloud.ai/console/coding-plan) · [Browse all models](https://www.atlascloud.ai/models)
+
+<details>
+<summary>📋 59 supported LLM models (click to expand)</summary>
+
+| Model ID | Description |
+|---|---|
+| `deepseek-ai/deepseek-v4-pro` | DeepSeek v4 Pro — top-tier reasoning |
+| `deepseek-ai/deepseek-r1` | DeepSeek R1 — chain-of-thought |
+| `deepseek-ai/deepseek-v3` | DeepSeek v3 — fast & capable |
+| `deepseek-ai/deepseek-r1-distill-qwen-32b` | DeepSeek R1 distilled (32B) |
+| `deepseek-ai/deepseek-r1-distill-llama-70b` | DeepSeek R1 distilled (70B) |
+| `qwen/qwen3-235b-a22b` | Qwen3 235B MoE |
+| `qwen/qwen3-32b` | Qwen3 32B |
+| `qwen/qwen3-14b` | Qwen3 14B |
+| `qwen/qwen3-8b` | Qwen3 8B |
+| `qwen/qwen-2.5-72b-instruct` | Qwen2.5 72B Instruct |
+| `qwen/qwen-2.5-coder-32b-instruct` | Qwen2.5 Coder 32B |
+| `qwen/qwq-32b` | QwQ 32B reasoning |
+| `anthropic/claude-opus-4-5` | Claude Opus 4.5 |
+| `anthropic/claude-sonnet-4-5` | Claude Sonnet 4.5 |
+| `anthropic/claude-haiku-3-5` | Claude Haiku 3.5 |
+| `openai/gpt-4o` | GPT-4o |
+| `openai/gpt-4o-mini` | GPT-4o mini |
+| `openai/o1-mini` | OpenAI o1-mini |
+| `openai/o3-mini` | OpenAI o3-mini |
+| `openai/o4-mini` | OpenAI o4-mini |
+| `google/gemini-2.5-pro` | Gemini 2.5 Pro |
+| `google/gemini-2.5-flash` | Gemini 2.5 Flash |
+| `google/gemini-2.0-flash` | Gemini 2.0 Flash |
+| `meta-llama/llama-4-scout-17b` | Llama 4 Scout 17B |
+| `meta-llama/llama-4-maverick-17b` | Llama 4 Maverick 17B |
+| `meta-llama/llama-3.3-70b-instruct` | Llama 3.3 70B Instruct |
+| `meta-llama/llama-3.1-8b-instruct` | Llama 3.1 8B Instruct |
+| `mistralai/mistral-7b-instruct` | Mistral 7B Instruct |
+| `mistralai/mixtral-8x7b-instruct` | Mixtral 8x7B |
+| `mistralai/mistral-large-latest` | Mistral Large |
+| `microsoft/phi-4` | Phi-4 |
+| `microsoft/phi-3.5-mini-128k-instruct` | Phi-3.5 Mini |
+| `nvidia/llama-3.1-nemotron-70b-instruct` | Nemotron 70B |
+| `amazon/nova-pro-v1` | Amazon Nova Pro |
+| `amazon/nova-lite-v1` | Amazon Nova Lite |
+| `amazon/nova-micro-v1` | Amazon Nova Micro |
+| `cohere/command-r-plus` | Cohere Command R+ |
+| `cohere/command-r` | Cohere Command R |
+| `01-ai/yi-lightning` | Yi Lightning |
+| `databricks/dbrx-instruct` | DBRX Instruct |
+| `allenai/olmo-7b-instruct` | OLMo 7B |
+| `togethercomputer/falcon-40b-instruct` | Falcon 40B |
+| `huggingfaceh4/zephyr-7b-beta` | Zephyr 7B Beta |
+| `openchat/openchat-3.5` | OpenChat 3.5 |
+| `teknium/openhermes-2.5-mistral-7b` | OpenHermes 2.5 |
+| `nousresearch/nous-hermes-2-mixtral-8x7b` | Nous Hermes 2 Mixtral |
+| `nousresearch/nous-hermes-llama2-13b` | Nous Hermes Llama2 13B |
+| `garage-bam/sqlcoder-7b-2` | SQLCoder 7B |
+| `lmsys/vicuna-13b-v1.5` | Vicuna 13B |
+| `stabilityai/stablelm-zephyr-3b` | StableLM Zephyr 3B |
+| `togethercomputer/redpajama-incite-7b-chat` | RedPajama 7B Chat |
+| `snorkelai/snorkel-mistral-pairrm-dpo` | Snorkel Mistral |
+| `Austism/chronos-hermes-13b` | Chronos Hermes 13B |
+| `DiscoResearch/DiscoLM-mixtral-8x7b-v2` | DiscoLM Mixtral |
+| `Gryphe/MythoMax-L2-13b` | MythoMax L2 13B |
+| `upstage/solar-10.7b-instruct-v1.0` | Solar 10.7B |
+| `cognitivecomputations/dolphin-2.5-mixtral-8x7b` | Dolphin 2.5 Mixtral |
+| `mistralai/mistral-medium` | Mistral Medium |
+| `mistralai/mistral-small` | Mistral Small |
+
+</details>
+
+<details>
+<summary>🎨 Supported image generation models via Atlas Cloud (click to expand)</summary>
+
+| Model | Category |
+|---|---|
+| `openai/gpt-image-2/text-to-image` | Text-to-Image |
+| `black-forest-labs/flux-1-pro/text-to-image` | Text-to-Image |
+| `black-forest-labs/flux-1-dev/text-to-image` | Text-to-Image |
+| `black-forest-labs/flux-2-pro/text-to-image` | Text-to-Image |
+| `stability-ai/stable-diffusion-xl/text-to-image` | Text-to-Image |
+| `bytedance/seedream-5/text-to-image` | Text-to-Image |
+| `ideogram/v3/text-to-image` | Text-to-Image |
+| `recraft/v3/text-to-image` | Text-to-Image |
+| `kling/v2-master/image-to-video` | Image-to-Video |
+| `bytedance/seedance-2-0/text-to-video` | Text-to-Video |
+| `wan/v2-1/text-to-video` | Text-to-Video |
+
+</details>
+
+---
+
 > 🤖 **Automate Lovart, Runway, Luma Labs, Krea, Pika & more with AI coding agents:** [Generative-Media-Skills](https://github.com/SamurAIGPT/Generative-Media-Skills) — a library of skills that let agents like **Claude Code**, **Codex**, and other coding assistants drive 200+ image/video models end-to-end (brief → plan → generate → edit → assemble) directly from your terminal. Build automated creative pipelines without touching a UI.
 
 https://github.com/user-attachments/assets/fee3857c-887d-4c27-b3dc-a1fe9ad8f438
