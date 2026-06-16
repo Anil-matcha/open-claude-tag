@@ -28,7 +28,7 @@ https://github.com/user-attachments/assets/fee3857c-887d-4c27-b3dc-a1fe9ad8f438
 
 ## 🌐 Try it Online — No Install Required
 
-**Hosted version:** [https://muapi.ai/assistant](https://muapi.ai/assistant)
+**Hosted version:** [https://muapi.ai/assistant?utm_source=github&utm_medium=readme&utm_campaign=open-ai-design-agent](https://muapi.ai/assistant?utm_source=github&utm_medium=readme&utm_campaign=open-ai-design-agent)
 
 Run the design agent directly in your browser — no Node.js, no setup. Sign up for a free account to start designing. The hosted version is always up to date with the latest models, planners, and templates.
 
@@ -36,7 +36,7 @@ Run the design agent directly in your browser — no Node.js, no setup. Sign up 
 
 ---
 
-Open AI Design Agent is a free, open-source AI design agent that turns natural-language briefs into full creative deliverables. Instead of picking one model and generating one asset, you describe a campaign, brand, or scene and the agent plans the deliverable list, picks the best model per asset (typography, vector, photoreal, motion), generates them in dependency order, threads brand references forward, and hands back the assembled kit. Powered by [Muapi.ai](https://muapi.ai), it orchestrates 200+ image and video models — Nano Banana 2, Flux 2 Pro, Ideogram v3, Seedream 5, GPT-Image, Recraft v3, Midjourney v7, Kling, Sora, Veo, Runway, Luma Ray2 — across a single agent loop you can self-host and modify.
+Open AI Design Agent is a free, open-source AI design agent that turns natural-language briefs into full creative deliverables. Instead of picking one model and generating one asset, you describe a campaign, brand, or scene and the agent plans the deliverable list, picks the best model per asset (typography, vector, photoreal, motion), generates them in dependency order, threads brand references forward, and hands back the assembled kit. Powered by [Muapi.ai](https://muapi.ai?utm_source=github&utm_medium=readme&utm_campaign=open-ai-design-agent), it orchestrates 200+ image and video models — Nano Banana 2, Flux 2 Pro, Ideogram v3, Seedream 5, GPT-Image, Recraft v3, Midjourney v7, Kling, Sora, Veo, Runway, Luma Ray2 — across a single agent loop you can self-host and modify.
 
 **Why Open Lovart instead of Lovart, Runway Agent, Luma Labs Agent, Krea Agent?**
 - **Free & open-source** — MIT-licensed, no subscription, no credit caps
@@ -123,7 +123,7 @@ The **Workflow Studio** lets you build and run multi-step design pipelines witho
 ### Prerequisites (when self-hosting lands)
 
 - [Node.js](https://nodejs.org/) (v18+)
-- A [Muapi.ai](https://muapi.ai) API key (free tier available)
+- A [Muapi.ai](https://muapi.ai?utm_source=github&utm_medium=readme&utm_campaign=open-ai-design-agent) API key (free tier available)
 
 ### Setup
 
@@ -196,7 +196,7 @@ MIT
 
 ## 🙏 Credits
 
-Built with [Muapi.ai](https://muapi.ai) — the unified API for AI image and video generation models.
+Built with [Muapi.ai](https://muapi.ai?utm_source=github&utm_medium=readme&utm_campaign=open-ai-design-agent) — the unified API for AI image and video generation models.
 
 ---
 *Looking for a free, open-source Lovart alternative? Open Lovart is an open-source AI design agent — a Lovart, Runway Agent, Luma Labs Agent, Krea Agent, Pika Agent, Galileo AI, Magic Patterns replacement that you can self-host, customize, and extend.*
@@ -224,7 +224,7 @@ This project is an independent, experimental, and open-source initiative and is 
 
 ### How to Get Started
 
-**Hosted (No Install):** https://muapi.ai/assistant — Run directly in browser
+**Hosted (No Install):** https://muapi.ai/assistant?utm_source=github&utm_medium=readme&utm_campaign=open-ai-design-agent — Run directly in browser
 
 **Self-Hosted:**
 ```bash
@@ -256,7 +256,7 @@ Visit `http://localhost:3000` and enter your Muapi API key.
 
 | Resource | Link |
 |----------|------|
-| **Hosted Studio** | https://muapi.ai/assistant |
+| **Hosted Studio** | https://muapi.ai/assistant?utm_source=github&utm_medium=readme&utm_campaign=open-ai-design-agent |
 | **Reddit Community** | https://reddit.com/r/muapi |
 | **Discord** | https://discord.gg/s7KW4fsqXK |
 | **Related Projects** | [Open-Generative-AI](https://github.com/Anil-matcha/Open-Generative-AI), [Vibe Workflow](https://github.com/SamurAIGPT/Vibe-Workflow) |
