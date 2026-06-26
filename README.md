@@ -356,6 +356,19 @@ Uses [LiteLLM](https://github.com/BerriAI/litellm) — one interface for every p
 model = "claude-opus-4-8"
 ```
 
+Channels can also point at OpenAI-compatible endpoints, including self-hosted
+gateways and cloud providers that expose the OpenAI chat completions API:
+
+```toml
+[llm]
+model = "openai/ernie-4.5-turbo-32k"
+api_base = "https://qianfan.baidubce.com/v2"
+api_key_env = "QIANFAN_API_KEY"
+```
+
+`api_key_env` names the environment variable TagOpen should read at runtime, so
+secrets stay out of channel config files.
+
 ---
 
 ## Built-in Tools

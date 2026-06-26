@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import logging
-from functools import lru_cache
 from pathlib import Path
 
 import aiosqlite
@@ -76,7 +75,9 @@ class MessageStore:
     ) -> None:
         assert self._db
         await self._db.execute(
-            """INSERT INTO messages (ts, thread_ts, channel_id, role, user_id, display_name, content, tool_calls)
+            """INSERT INTO messages (
+                   ts, thread_ts, channel_id, role, user_id, display_name, content, tool_calls
+               )
                VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
             (ts, thread_ts, self._channel_id, role, user_id, display_name, content, tool_calls),
         )
@@ -88,7 +89,7 @@ class MessageStore:
             """SELECT ts, role, user_id, display_name, content
                FROM messages
                WHERE channel_id = ?
-               ORDER BY created_at DESC
+               ORDER BY id DESC
                LIMIT ?""",
             (self._channel_id, limit),
         ) as cursor:

@@ -7,6 +7,11 @@
 # model = "claude-sonnet-4-6"               # use Anthropic
 # model = "gemini/gemini-2.0-flash"         # use Gemini
 # model = "groq/llama-3.3-70b-versatile"   # use Groq
+#
+# OpenAI-compatible endpoint override for this channel:
+# model = "openai/ernie-4.5-turbo-32k"
+# api_base = "https://qianfan.baidubce.com/v2"
+# api_key_env = "QIANFAN_API_KEY"           # read from process env, not this file
 
 # Example: GitHub MCP server
 # [[mcp_server]]

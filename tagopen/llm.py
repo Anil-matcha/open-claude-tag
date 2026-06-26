@@ -14,7 +14,7 @@ from __future__ import annotations
 
 import logging
 import os
-from pathlib import Path
+from dataclasses import dataclass
 
 import litellm
 import toml
@@ -25,6 +25,13 @@ logger = logging.getLogger(__name__)
 
 # Suppress LiteLLM's verbose success logs
 litellm.suppress_debug_info = True
+
+
+@dataclass(frozen=True)
+class ChannelLLMConfig:
+    model: str | None = None
+    api_base: str | None = None
+    api_key_env: str | None = None
 
 
 def configure() -> None:
@@ -67,24 +74,50 @@ def resolve_model(channel_id: str | None = None) -> str:
       2. LLM_MODEL env var / settings.llm_model
     """
     if channel_id:
-        override = _channel_model_override(channel_id)
-        if override:
-            return override
+        config = _channel_llm_config(channel_id)
+        if config.model:
+            return config.model
     return settings.llm_model
 
 
-def _channel_model_override(channel_id: str) -> str | None:
+def _channel_llm_config(channel_id: str) -> ChannelLLMConfig:
     tools_toml = settings.channels_dir / channel_id / "tools.toml"
     if not tools_toml.exists():
-        return None
+        return ChannelLLMConfig()
     try:
         config = toml.loads(tools_toml.read_text())
-        return config.get("llm", {}).get("model") or None
+        llm_config = config.get("llm", {})
+        return ChannelLLMConfig(
+            model=llm_config.get("model") or None,
+            api_base=llm_config.get("api_base") or None,
+            api_key_env=llm_config.get("api_key_env") or None,
+        )
     except Exception:
-        return None
+        return ChannelLLMConfig()
+
+
+def _apply_channel_llm_config(kwargs: dict, channel_id: str | None) -> None:
+    if not channel_id:
+        kwargs.setdefault("model", settings.llm_model)
+        return
+
+    config = _channel_llm_config(channel_id)
+    kwargs.setdefault("model", config.model or settings.llm_model)
+
+    if config.api_base:
+        kwargs.setdefault("api_base", config.api_base)
+
+    if config.api_key_env:
+        api_key = os.environ.get(config.api_key_env)
+        if not api_key:
+            raise ValueError(
+                f"Channel {channel_id} config references missing environment "
+                f"variable {config.api_key_env!r} for LLM api_key"
+            )
+        kwargs.setdefault("api_key", api_key)
 
 
 async def acompletion(channel_id: str | None = None, **kwargs):
     """Thin wrapper around litellm.acompletion that injects the resolved model."""
-    kwargs.setdefault("model", resolve_model(channel_id))
+    _apply_channel_llm_config(kwargs, channel_id)
     return await litellm.acompletion(**kwargs)
